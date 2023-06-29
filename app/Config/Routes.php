@@ -35,9 +35,28 @@ $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 
-$routes->get('/', 'Home::index');
-$routes->get('/keranjang', 'Page::keranjang');
-$routes->get('/produk', 'Page::produk');
+$routes->get('/', 'Home::index', ['filter'=>'auth']);
+
+$routes->get('/login', 'AuthController::login');
+$routes->add('/login', 'AuthController::login');
+$routes->add('/register', 'AuthController::register');
+$routes->get('/logout', 'AuthController::logout');
+
+$routes->get('/keranjang', 'TransaksiController::cart_show', ['filter' => 'auth']);
+$routes->add('/keranjang', 'TransaksiController::cart_add', ['filter' => 'auth']);
+$routes->add('/keranjang/edit', 'TransaksiController::cart_edit', ['filter' => 'auth']);
+$routes->add('/keranjang/delete/(:any)', 'TransaksiController::cart_delete/$1', ['filter' => 'auth']);
+$routes->add('/keranjang/clear', 'TransaksiController::cart_clear', ['filter' => 'auth']);
+
+$routes->get('/produk', 'ProdukController::index', ['filter' => 'auth']);
+$routes->add('/produk', 'ProdukController::create', ['filter' => 'auth']);
+$routes->add('/produk/edit/(:any)', 'ProdukController::edit/$1', ['filter' => 'auth']);
+$routes->get('/produk/delete/(:any)', 'ProdukController::delete/$1', ['filter' => 'auth']);
+
+$routes->get('/users', 'UserController::index', ['filter' => 'auth']);
+$routes->add('/users', 'UserController::create', ['filter' => 'auth']);
+$routes->add('/users/edit/(:any)', 'UserController::edit/$1', ['filter' => 'auth']);
+$routes->get('/users/delete/(:any)', 'UserController::delete/$1', ['filter' => 'auth']);
 
 /*
  * --------------------------------------------------------------------

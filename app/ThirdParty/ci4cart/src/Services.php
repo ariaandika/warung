@@ -1,8 +1,8 @@
-<?php
+<?php namespace CodeIgniterCart\Config;
 
-namespace Config;
+use CodeIgniter\Config\Services as CoreServices;
 
-use CodeIgniter\Config\BaseService;
+require_once SYSTEMPATH . 'Config/Services.php';
 
 /**
  * Services Configuration file.
@@ -16,20 +16,11 @@ use CodeIgniter\Config\BaseService;
  * that you might need. An example has been included with the general
  * method format you should use for your service methods. For more examples,
  * see the core Services file at system/Config/Services.php.
+ *
+ * @package CodeIgniterCart\Config
  */
-class Services extends BaseService
+class Services extends CoreServices
 {
-    /*
-     * public static function example($getShared = true)
-     * {
-     *     if ($getShared) {
-     *         return static::getSharedInstance('example');
-     *     }
-     *
-     *     return new \CodeIgniter\Example();
-     * }
-     */
-    
     /**
      * Shopping Cart Service
      *

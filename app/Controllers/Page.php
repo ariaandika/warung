@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Models\ProdukModel;
+
 class Page extends BaseController {
   public function keranjang() {
     return view('pages/keranjang_view');
@@ -11,6 +13,6 @@ class Page extends BaseController {
     $produk = $produkModel->findAll();
     $data['produks'] = $produk;
     
-    return view('pages/produk_view');
+    return view('pages/produk_view', $data);
   }
 }
