@@ -39,7 +39,7 @@ class ProdukController extends BaseController
   
       if ($dataFoto->isValid()){
         $fileName = $dataFoto->getRandomName();
-        $dataFoto->move('public/img/', $fileName);
+        $dataFoto->move('img/', $fileName);
         $dataForm['foto'] = $fileName;
       }  
   
@@ -69,7 +69,7 @@ class ProdukController extends BaseController
         $dataFoto = $this->request->getFile('foto');
         if ($dataFoto->isValid()){
           $fileName = $dataFoto->getRandomName();
-          $dataFoto->move('public/img/', $fileName);
+          $dataFoto->move('img/', $fileName);
           $dataForm['foto'] = $fileName;
         }             
       }
@@ -85,7 +85,7 @@ class ProdukController extends BaseController
   public function delete($id)
   {
     $dataProduk = $this->produk->find($id);
-    unlink("public/img/".$dataProduk['foto']);	
+    unlink("img/".$dataProduk['foto']);	
 
     $this->produk->delete($id);
 
