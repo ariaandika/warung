@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use App\Controllers\TransaksiController;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -51,6 +53,9 @@ $routes->get('/keranjang/getcity', 'TransaksiController::getcity', ['filter' => 
 $routes->get('/keranjang/getcost', 'TransaksiController::getcost', ['filter' => 'auth']);
 $routes->add('/keranjang/buy', 'TransaksiController::buy', ['filter' => 'auth']);
 $routes->add('/keranjang/checkout', 'TransaksiController::checkout', ['filter' => 'auth']);
+
+$routes->add('/transaksi', 'TransaksiController::transaksi_view', ['filter' => 'auth']);
+$routes->add('/transaksi/commit/(:any)', 'TransaksiController::transaksi_commit/$1', ['filter' => 'auth']);
 
 $routes->get('/produk', 'ProdukController::index', ['filter' => 'auth']);
 $routes->add('/produk', 'ProdukController::create', ['filter' => 'auth']);

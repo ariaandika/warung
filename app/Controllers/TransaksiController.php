@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\TransaksiModel;
 use Config\Services;
 
 class TransaksiController extends BaseController
@@ -16,6 +17,33 @@ class TransaksiController extends BaseController
 		helper('number');
 		helper('form');
 		$this->cart = Services::cart();
+	}
+	
+	function transaksi_view() {
+		$transaksi_model = new TransaksiModel();
+		$data['transaksi_list'] = $transaksi_model->findAll();
+		return view('pages/transaksi_view', $data);
+	}
+	
+	function transaksi_commit($id) {
+    $data = $this->request->getPost();
+    $transaksi_mod = new TransaksiModel();
+    $errors = null;
+
+    if(!$errors){
+      $dataForm = [
+        // 'nama' => $this->request->getPost('nama'),
+        // 'harga' => $this->request->getPost('harga'),
+        // 'jumlah' => $this->request->getPost('jumlah'),
+        'status' => $this->request->getPost('status')
+      ];
+
+      $transaksi_mod->update($id, $dataForm);
+
+      return redirect('transaksi')->with('success','Data Berhasil Diubah');
+    }else{
+      return redirect('transaksi')->with('failed',implode("",$errors));
+    }
 	}
 
 	public function cart_show()
